@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Navbar from './Navbar';
+import Login from './Login';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div style={styles.container}>
+        <Navbar />
+        <Routes>
+          {/* Default to Login */}
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<Login />} />
+          
+          {/* Profile/Dashboard route */}
+          <Route path="/profile" element={
+            <div style={styles.hero}>
+              <h1>Welcome Back, Athlete</h1>
+              <p>Your stats are looking sharp today.</p>
+            </div>
+          } />
+        </Routes>
+      </div>
+    </Router>
   );
 }
+
+const styles = {
+  container: { backgroundColor: '#121212', minHeight: '100vh', color: '#fff', fontFamily: 'Arial' },
+  hero: { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '80vh' }
+};
 
 export default App;
