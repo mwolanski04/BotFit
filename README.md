@@ -1,3 +1,11 @@
+# BotFit
+
+## What is BotFit?
+
+BotFit is a brand new application that allows for the creation of a quick, easy, and personalized workout plan and/or meal plan!
+
+Currently VERY eary in development! Stay tuned for updates!
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
