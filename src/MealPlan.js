@@ -1,46 +1,46 @@
-import React, { useEffect } from 'react';
-
 const MealPlan = () => {
-    //function createMealTable() {
-        useEffect(() => {
-                const data = [
-                    { when: "Breakfast", meal: "Scrambled Eggs", link: "https://www.simplyrecipes.com/recipes/how_to_make_fluffy_scrambled_eggs/" },
-                    { when: "Lunch", meal: "Grilled Chicken Salad", link: "https://www.delish.com/cooking/recipe-ideas/a19665918/grilled-chicken-salad-recipe/" },
-                    { when: "Dinner", meal: "Salmon with Veggies", link: "https://www.foodnetwork.com/recipes/food-network-kitchen/salmon-with-roasted-vegetables-recipe-2109877" }
-                ];
-
-                const table = document.createElement("table");
-                table.border = "1";
-
-                const headers = ["Time of Day", "Meal", "Link"];
-                const headerRow = document.createElement("tr");
-
-                headers.forEach(text => {
-                    const th = document.createElement("th");
-                    th.textContent = text;
-                    headerRow.appendChild(th);
-                });
-                table.appendChild(headerRow);
-
-                data.forEach(item => {
-                    const row = document.createElement("tr");
-                    Object.values(item).forEach(value => {
-                        const cell = document.createElement("td");
-                        cell.textContent = value;
-                        row.appendChild(cell);
-                    });
-                    table.appendChild(row);
-                });
-
-                document.getElementById("table-container").appendChild(table);
-            }, []);
+    const data = [
+        { when: "Breakfast", meal: "Scrambled Eggs", link: "https://www.simplyrecipes.com/recipes/how_to_make_fluffy_scrambled_eggs/" },
+        { when: "Lunch", meal: "Grilled Chicken Salad", link: "https://www.delish.com/cooking/recipe-ideas/a19665918/grilled-chicken-salad-recipe/" },
+        { when: "Dinner", meal: "Salmon with Veggies", link: "https://www.lecremedelacrumb.com/one-pan-baked-teriyaki-salmon-and-vegetables/" }
+    ];
 
     return (
-        <div>
+        <div style = {styles.wrapper}>
             <h2>Your Meal Plan</h2>
-            <div id="table-container"></div>
+
+            <table style = {styles.table}>
+                <thead>
+                    <tr style = {styles.tr}>
+                        <th>Time of Day</th>
+                        <th>Meal</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+
+                <tbody style = {styles.tbody}>
+                    {data.map((item, index) => (
+                        <tr key={index}>
+                            <td style = {styles.td}>{item.when}</td>
+                            <td style = {styles.td}>{item.meal}</td>
+                            <td style = {styles.td}>
+                                <a href={item.link} target="_blank" rel="noreferrer">
+                                    View a recommended recipe
+                                </a>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
+};
+
+const styles = {
+    wrapper: { display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '2rem' },
+    table: { width: '80%', borderCollapse: 'collapse', backgroundColor: '#00ff88', color: '#333'},
+    tr: { borderBottom: '2px solid #333', padding: '5px', fontSize: '20px', fontStyle: 'italic' },
+    td: { borderBottom: '1px solid #333', padding: '10px', textAlign: 'center' },
 };
 
 export default MealPlan;
