@@ -2,7 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Login from './Login';
+<<<<<<< Updated upstream
 import MealPlan from './MealPlan';
+=======
+import Profile from './Profile';
+>>>>>>> Stashed changes
 
 function App() {
   return (
@@ -13,6 +17,7 @@ function App() {
           {/* Default to Login */}
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
+<<<<<<< Updated upstream
           <Route path='/MealPlan' element={<MealPlan />} />
           
           {/* Profile/Dashboard route */}
@@ -22,6 +27,12 @@ function App() {
               <p>Your stats are looking sharp today.</p>
             </div>
           } />
+=======
+
+
+          <Route path="/profile" element={<Profile />} />
+
+>>>>>>> Stashed changes
         </Routes>
       </div>
     </Router>
