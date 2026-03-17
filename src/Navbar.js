@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <nav style={styles.navbar}>
       <Link title="Home" to="/" style={{ textDecoration: 'none' }}>
-        <div style={styles.logo}>AURAFIT</div>
+        <div style={styles.logo}>BOTFIT</div>
       </Link>
       <ul style={styles.navLinks}>
         <li><Link to="/login" style={styles.link}>Login</Link></li>
