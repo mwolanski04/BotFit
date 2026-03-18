@@ -2,8 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-    const navigate = useNavigate();  // ← this line is missing!
-
+    const navigate = useNavigate();
     const handleLogin = (e) => {
         e.preventDefault();
 
