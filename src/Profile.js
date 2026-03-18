@@ -14,17 +14,19 @@ const Profile = () => {
             <form style={styles.card} onSubmit={handleLogin}>
                 <h2 style={{ marginBottom: '1.rem', color: '#35c481ff' }}>Welcome back John </h2>
                 <h2 style={{ marginBottom: '1.5rem', color: '#00ff88' }}>Profile</h2>
+                {/*This is the hard coded info*/}
                 <p style={styles.input}>Current weight: 180</p>
                 <p style={styles.input}>Goal weight: 160</p>
                 <p style={styles.input}>Height: 5'11"</p>
+                {/*This is formatting for the buttons*/}
                 <button type="button" style={{ ...styles.button, marginTop: '1rem' }}>Meal plan</button>
                 <button type="button" style={{ ...styles.button, marginTop: '1rem' }}>Edit Profile</button>
                 <button type="button" style={{ ...styles.button, marginTop: '1rem' }}>Workout plan</button>
             </form>
-
+            {/*This makes the second box for this info*/}
             <form style={styles.card} onSubmit={handleLogin}>
-                <h2 style={{ marginBottom: '1.0rem', color: '#35c481ff' }}>Previous workout </h2>
-                <p style={styles.input}> Will have them here</p>
+                <h2 style={{ marginBottom: '1.0rem', color: '#35c481ff' }}>Previous workout</h2>
+                <p style={styles.input}>Will have them here</p>
 
             </form>
 
