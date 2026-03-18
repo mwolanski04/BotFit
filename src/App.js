@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Navbar from './Navbar';
 import Login from './Login';
 import MealPlan from './MealPlan';
+import MealPlanForm from './MealPlanForm';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route path='/MealPlan' element={<MealPlan />} />
+          <Route path='/MealPlanForm' element={<MealPlanForm />} />
           
           {/* Profile/Dashboard route */}
           <Route path="/profile" element={

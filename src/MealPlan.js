@@ -9,7 +9,7 @@ const MealPlan = () => {
     ];
 
     const updatePlan = () => {
-        navigate('/profile');
+        navigate('/MealPlanForm');
     }
 
     return (
