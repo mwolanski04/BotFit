@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Login from './Login';
 import MealPlan from './MealPlan';
 import MealPlanForm from './MealPlanForm';
+import Profile from './Profile';
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
               <p>Your stats are looking sharp today.</p>
             </div>
           } />
+          <Route path="/Profile" element={<Profile />} />
+
         </Routes>
       </div>
     </Router>
