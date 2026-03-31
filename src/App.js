@@ -5,6 +5,8 @@ import Login from './Login';
 import MealPlan from './MealPlan';
 import MealPlanForm from './MealPlanForm';
 import Profile from './Profile';
+import Register from './Register';
+
 
 function App() {
   return (
@@ -17,9 +19,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path='/MealPlan' element={<MealPlan />} />
           <Route path='/MealPlanForm' element={<MealPlanForm />} />
-          
+          <Route path="/Register" element={<Register />} />
+          <Route path="/Profile" element={<Profile />} />
+
           {/* Profile/Dashboard route */}
-          <Route path="/profile" element={
+          <Route path="/Profile" element={
             <div style={styles.hero}>
               <h1>Welcome Back, Athlete</h1>
               <p>Your stats are looking sharp today.</p>
