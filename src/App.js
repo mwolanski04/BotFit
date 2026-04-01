@@ -4,6 +4,8 @@ import Navbar from './Navbar';
 import Login from './Login';
 import MealPlan from './MealPlan';
 import MealPlanForm from './MealPlanForm';
+import WorkoutPlan from './WorkoutPlan';
+import WorkoutPlanForm from './WorkoutPlanForm';
 import Profile from './Profile';
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path='/MealPlan' element={<MealPlan />} />
           <Route path='/MealPlanForm' element={<MealPlanForm />} />
+          <Route path='/WorkoutPlan' element={<WorkoutPlan />} />
+          <Route path='/WorkoutPlanForm' element={<WorkoutPlanForm />} />
           
           {/* Profile/Dashboard route */}
           <Route path="/profile" element={
