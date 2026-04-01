@@ -5,6 +5,7 @@ const WorkoutPlanForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // Will contact the backend to update the workout plan based on the user's input
         navigate('/WorkoutPlan');
         alert("Your workout plan has been updated!");
     }
