@@ -1,7 +1,7 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
-import WorkoutPlan from './WorkoutPlan';
+import WorkoutPlan from '../WorkoutPlan';
 
 // useNavigate is a hook that needs to be mocked
 const mockNavigate = jest.fn();
