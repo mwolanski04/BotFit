@@ -1,22 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setError('');
+    setLoading(true);
 
-    navigate('/profile');
+    try {
+      const response = await fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        navigate('/profile');
+      } else if (response.status === 404) {
+        navigate('/Register');
+      } else {
+        setError(data.error);
+      }
+    } catch (err) {
+      setError('Could not connect to server');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div style={styles.wrapper}>
       <form style={styles.card} onSubmit={handleLogin}>
         <h2 style={{ marginBottom: '1.5rem', color: '#00ff88' }}>Member Login</h2>
-        <input type="email" placeholder="Email" style={styles.input} required />
-        <input type="password" placeholder="Password" style={styles.input} required />
-        <button type="submit" style={styles.button}>Start Training</button>
+        <input
+          type="email"
+          placeholder="Email"
+          style={styles.input}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          style={styles.input}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        {error && <p style={styles.error}>{error}</p>}
+        <button type="submit" style={styles.button} disabled={loading}>
+          {loading ? 'Logging in' : 'Start Training'}
+        </button>
       </form>
     </div>
   );
