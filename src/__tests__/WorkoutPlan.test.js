@@ -55,12 +55,10 @@ test('renders all columns for each exercise', () => {
   });
 });
 
-
 test('renders the Update Workout Plan button', () => {
   renderWorkoutPlan();
   expect(screen.getByRole('button', { name: /update workout plan/i })).toBeInTheDocument();
 });
-
 
 // --- Tutorial Link Tests ---
 
@@ -86,15 +84,12 @@ test('tutorial links have rel="noopener noreferrer" for security', () => {
   });
 });
 
-
 // --- Interaction Tests ---
 
 test('clicking Update Workout Plan navigates to /WorkoutPlanForm', async () => {
   const user = userEvent.setup();
   renderWorkoutPlan();
-
   await user.click(screen.getByRole('button', { name: /update workout plan/i }));
-
   expect(mockNavigate).toHaveBeenCalledTimes(1);
   expect(mockNavigate).toHaveBeenCalledWith('/WorkoutPlanForm');
 });
