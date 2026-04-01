@@ -26,12 +26,18 @@ Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
-You may also see any lint errors in the console.
+You may also see any lint errors in the console. You may need to run the code following this one.
 
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+If you are wanting to run tests, there may be a chance that it doesn't run on the first time. This is because with `npm install` it updates some files, making it incompatible with the tester. To fix this, run:
+
+### `npm install react-router-dom@6.30.0 --save --legacy-peer-deps`
+
+-=-
 
 ### `npm run build`
 
