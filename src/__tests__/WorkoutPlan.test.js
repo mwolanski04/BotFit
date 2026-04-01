@@ -22,7 +22,6 @@ beforeEach(() => {
   mockNavigate.mockClear();
 });
 
-
 // --- Rendering Tests ---
 
 test('renders the main heading', () => {
