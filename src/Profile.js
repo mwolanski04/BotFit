@@ -9,7 +9,7 @@ const Profile = () => {
         navigate('/profile');
     };
 
-    return (
+    return ( //Try and space these out more on the website they are too close together
         <div style={styles.wrapper}>
             <form style={styles.card} onSubmit={handleLogin}>
                 <h2 style={{ marginBottom: '1.rem', color: '#35c481ff' }}>Welcome back John </h2>
