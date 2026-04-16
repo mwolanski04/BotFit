@@ -1,23 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
     const navigate = useNavigate();
+
+    const [data, setData] = useState({ firstName: '', currentWeight: '', goalWeight: '', height: '' });
+
+    useEffect(() => {
+        fetch('http://localhost:5000/profile', { credentials: 'include' })
+            .then(res => res.json())
+            .then(profileData => setData(profileData));
+    }, []);
+
     const handleLogin = (e) => {
         e.preventDefault();
-
         navigate('/profile');
     };
 
     return ( //Try and space these out more on the website they are too close together
         <div style={styles.wrapper}>
             <form style={styles.card} onSubmit={handleLogin}>
-                <h2 style={{ marginBottom: '1.rem', color: '#35c481ff' }}>Welcome back John </h2>
+                <h2 style={{ marginBottom: '1.rem', color: '#35c481ff' }}>Welcome back {data.firstName} </h2>
                 <h2 style={{ marginBottom: '1.5rem', color: '#00ff88' }}>Profile</h2>
                 {/*This is the hard coded info*/}
-                <p style={styles.input}>Current weight: 180</p>
-                <p style={styles.input}>Goal weight: 160</p>
-                <p style={styles.input}>Height: 5'11"</p>
+                <p style={styles.input}>Current weight: {data.currentWeight}</p>
+                <p style={styles.input}>Goal weight: {data.goalWeight}</p>
+                <p style={styles.input}>Height: {Math.round((data.height / 12).toFixed(1))}ft</p>
+                <p style={styles.input}>Age: {data.age}</p>
+
                 {/*This is formatting for the buttons*/}
                 <button type="button" style={{ ...styles.button, marginTop: '1rem' }}>Meal plan</button>
                 <button type="button" style={{ ...styles.button, marginTop: '1rem' }}>Edit Profile</button>

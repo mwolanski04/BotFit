@@ -20,7 +20,7 @@ First thing you will need to run is:
 
 to install the necessary React elements. After that, you can run the below commands.
 
-### `npm start`
+### `docker-compose up --build -d`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.

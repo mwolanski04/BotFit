@@ -3,6 +3,8 @@ from flask_cors import CORS
 import pyodbc
 import bcrypt
 
+
+
 app = Flask(__name__)
 app.secret_key = 'SLU23'
 CORS(app, supports_credentials=True)
@@ -54,6 +56,30 @@ def register():
 
     session['user_id'] = data.get('email')
     return jsonify({'message': 'Registration successful'}), 201
+
+
+@app.route('/profile', methods=['GET'])
+def profile():
+    email = session.get('user_id')
+    if not email:
+        return jsonify({'error': 'User not logged in'}), 401
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT firstName, lastName, email, goalWeight, currentWeight, height, age, gender FROM users WHERE email =?", email)
+    row = cursor.fetchone()
+    if not row:
+        return jsonify({"error": "User is not found"}), 404
+    else:
+        return jsonify({
+            "firstName": row[0],
+            "lastName": row[1],
+            "email": row[2],
+            "goalWeight": row[3],
+            "currentWeight": row[4],
+            "height": row[5],
+            "age": row[6],
+            "gender": row[7],
+        }), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
