@@ -8,7 +8,7 @@ RUN echo "deb [arch=arm64 signed-by=/usr/share/keyrings/microsoft.gpg] https://p
 
 RUN apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql18 unixodbc-dev
 
-RUN pip install flask flask-cors pyodbc bcrypt
+RUN pip install flask flask-cors pyodbc bcrypt google-genai python-dotenv
 
 WORKDIR /app
 COPY src/ .

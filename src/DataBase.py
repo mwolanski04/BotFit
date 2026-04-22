@@ -2,12 +2,17 @@ from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 import pyodbc
 import bcrypt
-
-
+import os
+from dotenv import load_dotenv
+from google import genai
 
 app = Flask(__name__)
 app.secret_key = 'SLU23'
 CORS(app, supports_credentials=True)
+
+load_dotenv()
+api_key = os.environ.get("GEMINI_API_KEY")
+client = genai.Client(api_key=api_key) if api_key else None
 
 def get_db():
     conn = pyodbc.connect(
@@ -26,15 +31,18 @@ def login():
     password = request.json.get('password')
     conn = get_db()
     cursor = conn.cursor()
+    # Fetch the stored password hash for the given email
     cursor.execute("SELECT password_hash FROM users WHERE email = ?", email)
     row = cursor.fetchone()
 
     if not row:
         return jsonify({'error': 'Email not found'}), 404
         
+    # Verify the password against the stored hash
     if not bcrypt.checkpw(password.encode(), row[0].encode()):
         return jsonify({'error': 'Wrong password'}), 401
 
+    # Store the user's email in the session to keep them logged in
     session['user_id'] = email
     return jsonify({'message': 'Login successful'}), 200
 
@@ -44,6 +52,7 @@ def register():
     conn = get_db()
     cursor = conn.cursor()
     
+    # Hash the user's new password before saving it to the database
     hashed = bcrypt.hashpw(data.get('password').encode(), bcrypt.gensalt()).decode()
 
     cursor.execute("""
@@ -54,17 +63,20 @@ def register():
           data.get('age'), data.get('gender')))
     conn.commit()
 
+    # Automatically log the user in after successful registration
     session['user_id'] = data.get('email')
     return jsonify({'message': 'Registration successful'}), 201
 
 
 @app.route('/profile', methods=['GET'])
 def profile():
+    # Retrieve the user ID from the active session
     email = session.get('user_id')
     if not email:
         return jsonify({'error': 'User not logged in'}), 401
     conn = get_db()
     cursor = conn.cursor()
+    # Gets all profile data for the user
     cursor.execute("SELECT firstName, lastName, email, goalWeight, currentWeight, height, age, gender FROM users WHERE email =?", email)
     row = cursor.fetchone()
     if not row:
