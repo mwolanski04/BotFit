@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   db:
@@ -6,7 +6,7 @@ services:
     platform: linux/amd64
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "SLUonTOP123"
+      MSSQL_SA_PASSWORD: "BotFit123!"
     ports:
       - "1433:1433"
     volumes:
@@ -23,7 +23,7 @@ services:
     environment:
       - DB_SERVER=db
       - DB_PASSWORD=SLUonTOP123
-    # Mount the local src/ folder into the container so code updates instantly 
+    # Mount the local src/ folder into the container so code updates instantly
     # without needing to rebuild the Docker image!
     volumes:
       - ./src:/app
@@ -41,7 +41,6 @@ services:
 
 volumes:
   sqldata:
-
 
 networks:
   default:

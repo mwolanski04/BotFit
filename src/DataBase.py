@@ -20,7 +20,7 @@ def get_db():
         'SERVER=db,1433;'             
         'DATABASE=botFit;'      
         'UID=sa;'                     
-        'PWD=SLUonTOP123;'
+        'PWD=BotFit123!;'
         'TrustServerCertificate=yes;'
     )
     return conn
