@@ -19,8 +19,18 @@ const renderWorkoutPlan = () => render(
 
 // Clear mock call history between tests
 beforeEach(() => {
+    global.fetch = jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve({ message: 'Success' }),
+    })
+  );
   mockNavigate.mockClear();
 });
+
+afterEach(() => {
+    jest.resetAllMocks();
+})
 
 // --- Rendering Tests ---
 
