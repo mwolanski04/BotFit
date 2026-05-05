@@ -19,13 +19,26 @@ const renderWorkoutPlan = () => render(
 
 // Clear mock call history between tests
 beforeEach(() => {
-    global.fetch = jest.fn(() =>
-    Promise.resolve({
-      ok: true,
-      json: () => Promise.resolve({ message: 'Success' }),
-    })
-  );
-  mockNavigate.mockClear();
+  global.fetch = jest.fn((url) => {
+    if (url.includes('localhost:5000/profile')) {
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({
+          currentWeight: 180,
+          goalWeight: 160,
+          height: 70,
+          age: 25,
+          gender: 'Male'
+        }),
+      });
+    }
+    if (url.includes('localhost:5001/workoutplan')) {
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ text: 'Here is your workout plan...' }),
+      });
+    }
+  });
 });
 
 afterEach(() => {
@@ -58,15 +71,20 @@ test('renders the submit button', () => {
 
 // --- Interaction Tests ---
 
-test('submitting the form navigates to WorkoutPlan and shows alert', async () => {
-    renderWorkoutPlan();
-    const user = userEvent.setup();
-    const button = screen.getByRole('button', { name: /change workout plan/i });
-    window.alert = jest.fn();
-    await user.click(button);
-    expect(mockNavigate).toHaveBeenCalledWith('/WorkoutPlan');
-    expect(window.alert).toHaveBeenCalledWith("Your workout plan has been updated!");
-})
+test('submitting the form displays the AI response', async () => {
+  const user = userEvent.setup();
+  render(
+    <MemoryRouter>
+      <WorkoutPlanForm />
+    </MemoryRouter>
+  );
+
+  const button = screen.getByRole('button', { name: /change workout plan/i });
+  await user.click(button);
+
+  // Check that the generated workout plan section appears
+  expect(await screen.findByText('Generated Workout Plan:')).toBeInTheDocument();
+});
 
 test('allows user to select a reason from the dropdown', async () => {
     renderWorkoutPlan();
