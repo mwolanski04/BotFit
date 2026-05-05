@@ -93,5 +93,29 @@ def profile():
             "gender": row[7],
         }), 200
 
+# Would have been added, but my database started to not work
+
+# @app.route('/workoutplan/<int:user_id>', methods=['GET'])
+# def get_workout_plan(user_id):
+#     try:
+#         conn = get_db()
+#         cursor = conn.cursor()
+#         cursor.execute("SELECT dayOfWeek, workoutFocus, exercise, sets, repetitions, tutorial FROM workout_plans WHERE user_id = ?", user_id)
+#         rows = cursor.fetchall()
+#         plan = [
+#             {
+#                 "dayOfWeek": row[0],
+#                 "workoutFocus": row[1],
+#                 "exercise": row[2],
+#                 "sets": row[3],
+#                 "repetitions": row[4],
+#                 "tutorial": row[5]
+#             }
+#             for row in rows
+#             ]
+#         return jsonify(plan), 200
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

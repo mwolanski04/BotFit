@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const WorkoutPlan = () => {
@@ -13,6 +14,39 @@ const WorkoutPlan = () => {
     const updatePlan = () => {
         navigate('/WorkoutPlanForm');
     }
+
+
+// Planned to implement, however my database broke while implementing
+
+// const WorkoutPlan = () => {
+//     const navigate = useNavigate();
+//     const [data, setData] = useState([]);
+//     const [dayOfWeek, setDayOfWeek] = useState([]);
+//     const [workoutFocus, setWorkoutFocus] = useState('');
+//     const [loading, setLoading] = useState(true)
+//     const [error, seterror] = useState(null);
+
+    // useEffect(() => {
+    //     // REPLACE HERE
+    //     fetch('http://localhost:5000/workoutplan/profile')
+    //     // REPLACE HERE
+    //         .then(res => res.json())
+    //         .then(plan => {
+    //             setData(plan)
+    //             if (plan.length > 0) {
+    //                 setDayOfWeek(plan[0].dayOfWeek);
+    //                 setWorkoutFocus(plan[0].workoutFocus);
+    //             }
+    //             setLoading(false);
+    //         })
+    //         .catch(err => {
+    //             seterror('Failed to load workout plan');
+    //             setLoading(false);
+    //         });
+
+    //         if (loading) return <p>Loading workout plan...</p>
+    //         if (error) return <p>{error}</p>
+    // })
 
     return (
         <div style = {styles.wrapper}>

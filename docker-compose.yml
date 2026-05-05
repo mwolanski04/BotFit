@@ -22,7 +22,7 @@ services:
     env_file: .env
     environment:
       - DB_SERVER=db
-      - DB_PASSWORD=SLUonTOP123
+      - DB_PASSWORD=BotFit123!
     # Mount the local src/ folder into the container so code updates instantly
     # without needing to rebuild the Docker image!
     volumes:
@@ -34,6 +34,8 @@ services:
     command: python AiApi.py
     ports:
       - "5001:5001"
+    depends_on:
+      - flask
     env_file: .env
     # Keeping the AI container live-synced to local file changes too
     volumes:
