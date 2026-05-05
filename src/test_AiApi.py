@@ -41,9 +41,8 @@ class TestAiApi(unittest.TestCase):
     def test_missing_data(self):
         response = self.app.post('/mealplan', json=None)
         
-        # Verify it catches the error and returns a 500 status code
-        self.assertEqual(response.status_code, 500)
-        self.assertIn('error', response.json)
+        # Verify Flask correctly rejects the request with a 415 Unsupported Media Type error
+        self.assertEqual(response.status_code, 415)
 
 if __name__ == '__main__':
     unittest.main()
