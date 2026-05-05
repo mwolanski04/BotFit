@@ -8,13 +8,31 @@ const Profile = () => {
 
     useEffect(() => {
         fetch('http://localhost:5000/profile', { credentials: 'include' })
-            .then(res => res.json())
-            .then(profileData => setData(profileData));
-    }, []);
+            .then(res => {
+                if (!res.ok) {
+                    navigate('/login');
+                    throw new Error('Not logged in');
+                }
+                return res.json();
+            })
+            .then(profileData => setData(profileData))
+            .catch(err => console.log(err));
+    }, [navigate]);
 
     const handleLogin = (e) => {
         e.preventDefault();
         navigate('/profile');
+    };
+
+    const handleLogout = () => {
+        fetch('http://localhost:5000/logout', { 
+            method: 'POST',
+            credentials: 'include' 
+        })
+        .then(() => {
+            navigate('/login');
+        })
+        .catch(err => console.log(err));
     };
 
     return ( //Try and space these out more on the website they are too close together
@@ -29,9 +47,10 @@ const Profile = () => {
                 <p style={styles.input}>Age: {data.age}</p>
 
                 {/*This is formatting for the buttons*/}
-                <button type="button" style={{ ...styles.button, marginTop: '1rem' }}>Meal plan</button>
+                <button type="button" onClick={() => navigate('/MealPlan')} style={{ ...styles.button, marginTop: '1rem' }}>Meal plan</button>
                 <button type="button" style={{ ...styles.button, marginTop: '1rem' }}>Edit Profile</button>
-                <button type="button" style={{ ...styles.button, marginTop: '1rem' }}>Workout plan</button>
+                <button type="button" onClick={() => navigate('/WorkoutPlanForm')} style={{ ...styles.button, marginTop: '1rem' }}>Workout plan</button>
+                <button type="button" onClick={handleLogout} style={{ ...styles.button, marginTop: '1rem', background: '#ff4c4c', color: '#fff' }}>Logout</button>
             </form>
             {/*This makes the second box for this info*/}
             <form style={styles.card} onSubmit={handleLogin}>

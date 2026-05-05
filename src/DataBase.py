@@ -68,6 +68,11 @@ def register():
     return jsonify({'message': 'Registration successful'}), 201
 
 
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.pop('user_id', None)
+    return jsonify({'message': 'Logged out successfuly'}), 200
+
 @app.route('/profile', methods=['GET'])
 def profile():
     # Retrieve the user ID from the active session
