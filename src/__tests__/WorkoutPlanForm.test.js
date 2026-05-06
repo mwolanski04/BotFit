@@ -58,7 +58,7 @@ test('renders the reason label and dropdown', () => {
     expect(screen.getByRole('combobox')).toBeInTheDocument();
 })
 
-test('renders the additional details label and textarea', () => {
+test('renders the additional details label and text area', () => {
     renderWorkoutPlan();
     expect(screen.getByText(/Is there anything we should account for in future workouts?/i)).toBeInTheDocument();
     expect(screen.getByRole('textbox')).toBeInTheDocument();
