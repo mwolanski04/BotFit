@@ -1,29 +1,28 @@
 version: "3.8"
 
 services:
-  # If this stays commented, I accidentally forgot to remove the comments. This is needed so I can run something.
-  # db:
-  #  image: mcr.microsoft.com/mssql/server:2022-latest
-  #  platform: linux/amd64
-  #  environment:
-  #    ACCEPT_EULA: "Y"
-  #    MSSQL_SA_PASSWORD: "BotFit123!"
-  #  ports:
-  #    - "1433:1433"
-  #  volumes:
-  #    - sqldata:/var/opt/mssql
-  #    - ./database/setup.sql:/setup.sql
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    platform: linux/amd64
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "BotFit123!"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqldata:/var/opt/mssql
+      - ./database/setup.sql:/setup.sql
 
   flask:
     build: .
     ports:
       - "5000:5000"
-    #depends_on:
-    #  - db
+    depends_on:
+      - db
     env_file: .env
-    #environment:
-    #  - DB_SERVER=db
-    #  - DB_PASSWORD=BotFit123!
+    environment:
+      - DB_SERVER=db
+      - DB_PASSWORD=BotFit123!
     # Mount the local src/ folder into the container so code updates instantly
     # without needing to rebuild the Docker image!
     volumes:
