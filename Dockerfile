@@ -6,7 +6,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /u
 
 RUN echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/debian/12/prod bookworm main" > /etc/apt/sources.list.d/mssql-release.list
 
-RUN apt-get install -y msodbcsql18 unixodbc-dev
+RUN apt-get update && apt-get install -y msodbcsql18 unixodbc-dev
 
 RUN pip install flask flask-cors pyodbc bcrypt google-genai python-dotenv
 

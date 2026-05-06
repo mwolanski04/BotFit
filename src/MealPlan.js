@@ -31,7 +31,7 @@ const MealPlan = () => {
                             <td style={styles.td}>{item.when}</td>
                             <td style={styles.td}>{item.meal}</td>
                             <td style={styles.td}>
-                                <a href={item.link} target="_blank" rel="noreferrer">
+                                <a href={item.link} target="_blank" rel="noopener noreferrer">
                                     View a recommended recipe
                                 </a>
                             </td>
